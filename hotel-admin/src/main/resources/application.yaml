@@ -16,7 +16,7 @@ mybatis-plus:
     map-underscore-to-camel-case: true
   type-aliases-package: com.lgypro.hotel.pojo
 sync:
-  enable-produce-hotel-sync-messages: true
+  enable-produce-hotel-sync-messages: false
   aws:
     sqs:
       region-id: ap-northeast-1
