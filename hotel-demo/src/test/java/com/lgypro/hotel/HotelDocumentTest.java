@@ -1,6 +1,7 @@
 package com.lgypro.hotel;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch._types.Conflicts;
 import co.elastic.clients.elasticsearch.core.BulkRequest;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
 import co.elastic.clients.elasticsearch.core.GetResponse;
@@ -85,5 +86,17 @@ public class HotelDocumentTest {
             }
         }
         System.out.println("total elapsed time: " + (System.currentTimeMillis() - startTime) + "ms");
+    }
+
+    @Test
+    void deleteAllDocuments() throws IOException {
+        client.deleteByQuery(b1 -> b1
+            .index("hotel")
+            .conflicts(Conflicts.Proceed)
+            .query(b2 -> b2
+                .matchAll(b3 -> b3)
+            )
+            .refresh(true)
+        );
     }
 }
